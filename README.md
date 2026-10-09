@@ -1,114 +1,102 @@
-# Gerador de Senhas Seguras - Um MVP focado em desenvolvimento assistido por IA
+# Secure Password Generator
 
-Gerador de Senhas Seguras é um MVP em Python para gerar senhas com foco em segurança criptográfica, usabilidade em terminal e documentação de processo para laboratório de IA Generativa.
+[![CI](https://github.com/guirodrigues0987/gerador-senhas-ia/actions/workflows/ci.yml/badge.svg)](https://github.com/guirodrigues0987/gerador-senhas-ia/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## Configuração de Ambiente
+A Python MVP that generates passwords with a focus on cryptographic security, command-line usability and process documentation, built as a lab project on AI-assisted development with generative AI.
 
-1. Crie a `venv` na raiz do projeto:
-```powershell
-python -m venv venv
-```
+## Setup
 
-2. Ative a `venv` no PowerShell:
-```powershell
-.\venv\Scripts\Activate.ps1
-```
+1. Create a virtual environment at the project root:
+   ```bash
+   python -m venv venv
+   ```
+2. Activate it:
+   ```bash
+   # Linux / macOS
+   source venv/bin/activate
+   # Windows (PowerShell)
+   .\venv\Scripts\Activate.ps1
+   ```
+3. Upgrade `pip` and install the dependencies:
+   ```bash
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
 
-3. Atualize o `pip`:
-```powershell
-python -m pip install --upgrade pip
-```
+## Usage
 
-4. Instale as dependências listadas em `requirements.txt`:
-```powershell
-pip install -r requirements.txt
-```
-
-## Exemplos de Uso
-
-Gerar uma senha com o tamanho padrão:
-```powershell
+```bash
+# Default length (16 characters)
 python main.py
-```
 
-Gerar uma senha com 20 caracteres:
-```powershell
+# 20 characters
 python main.py --length 20
-```
 
-Gerar uma senha sem símbolos:
-```powershell
+# Letters and numbers only
 python main.py --no-symbols
-```
 
-Gerar uma senha com 24 caracteres, sem números:
-```powershell
+# 24 characters, no numbers
 python main.py --length 24 --no-numbers
 ```
 
-Gerar uma senha usando apenas letras e números:
-```powershell
-python main.py --no-symbols
-```
+| Flag | Description |
+|---|---|
+| `--length N` | Password length (default: 16) |
+| `--no-letters` | Exclude ASCII letters |
+| `--no-numbers` | Exclude digits |
+| `--no-symbols` | Exclude punctuation symbols |
 
-## Tecnologias e Modelos de IA
+The generator guarantees at least one character from each enabled character set.
+
+## Tech stack
 
 - Python 3.11+
-- Bibliotecas nativas do Python: `secrets`, `string`, `argparse`
-- Biblioteca de testes: `pytest`
-- Assistente de código utilizado no desenvolvimento: GPT-5.5
+- Standard library only at runtime: `secrets`, `string`, `argparse`
+- Tests: `pytest`
+- Linting and formatting: [Ruff](https://docs.astral.sh/ruff/)
+- Code assistant used during development: GPT-5.5 (see [`docs/prompt_log.md`](docs/prompt_log.md))
 
-## Limitações e Próximos Passos
+## Project structure
 
-- O projeto ainda não possui interface gráfica.
-- Não há histórico de senhas geradas.
-- Não existe exportação para arquivo ou integração com cofres de senha.
-- Não há política avançada de complexidade, como regras por comprimento mínimo de cada tipo de caractere.
-- Não há persistência de configurações do usuário.
+See [`docs/project_structure.md`](docs/project_structure.md).
 
-Próximos passos possíveis:
+## Tests
 
-- Criar uma interface gráfica simples.
-- Adicionar histórico local opcional.
-- Incluir validação de força da senha.
-- Permitir copiar a senha automaticamente para a área de transferência.
-- Salvar perfis de geração com presets.
-
-## Créditos e Licença
-
-Projeto desenvolvido como MVP para um laboratório de IA Generativa.
-
-Licença: MIT.
-
-## Gerenciamento de Dependências
-
-As dependências do projeto são gerenciadas pelo arquivo `requirements.txt`.
-
-Para instalar tudo em um ambiente isolado, use:
-
-```powershell
-pip install -r requirements.txt
-```
-
-## Testes Automatizados
-
-Os testes automatizados usam `pytest`.
-
-Para executar:
-
-```powershell
+```bash
 pytest
 ```
 
-Os testes unitários validam:
+The unit tests cover:
 
-- Geração de senha com tamanho padrão.
-- Geração de senha com tamanho customizado.
-- Rejeição de tamanho inválido.
-- Rejeição quando nenhum tipo de caractere é habilitado.
-- Rejeição quando o tamanho é menor que a quantidade de grupos de caracteres ativados.
+- Password generation with the default length.
+- Password generation with a custom length.
+- Rejection of invalid lengths.
+- Rejection when no character set is enabled.
+- Rejection when the length is smaller than the number of enabled character sets.
 
-## Releases/Tags
+## Limitations and next steps
 
-A versão estável atual do projeto é `v1.0.0`.
+Current limitations:
 
+- No graphical interface.
+- No history of generated passwords.
+- No export to file or integration with password managers.
+- No advanced complexity policy (e.g. minimum count per character type).
+- No persisted user settings.
+
+Possible next steps:
+
+- Simple graphical interface.
+- Optional local history.
+- Password strength validation.
+- Copy to clipboard.
+- Generation presets.
+
+## Releases
+
+The current stable version is `v1.0.0`.
+
+## Credits and license
+
+Developed as an MVP for a generative AI lab. Released under the [MIT License](LICENSE).
