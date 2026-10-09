@@ -11,22 +11,22 @@ def generate_password(
     use_symbols: bool = True,
 ) -> str:
     """
-    Gera uma senha usando fonte criptograficamente segura.
+    Generate a password using a cryptographically secure source.
 
     Args:
-        length: Tamanho total da senha.
-        use_letters: Inclui letras ASCII.
-        use_numbers: Inclui dígitos.
-        use_symbols: Inclui símbolos de pontuação.
+        length: Total password length.
+        use_letters: Include ASCII letters.
+        use_numbers: Include digits.
+        use_symbols: Include punctuation symbols.
 
     Returns:
-        Uma senha aleatória com os conjuntos habilitados.
+        A random password using the enabled character sets.
 
     Raises:
-        ValueError: Se o tamanho for inválido ou nenhum conjunto estiver habilitado.
+        ValueError: If the length is invalid or no character set is enabled.
     """
     if length <= 0:
-        raise ValueError("length deve ser maior que zero.")
+        raise ValueError("length must be greater than zero.")
 
     pools = []
     if use_letters:
@@ -37,12 +37,10 @@ def generate_password(
         pools.append(string.punctuation)
 
     if not pools:
-        raise ValueError("Ative pelo menos um tipo de caractere.")
+        raise ValueError("Enable at least one character type.")
 
     if length < len(pools):
-        raise ValueError(
-            "length deve ser maior ou igual ao número de tipos de caracteres ativados."
-        )
+        raise ValueError("length must be at least the number of enabled character types.")
 
     alphabet = "".join(pools)
     password_chars = [secrets.choice(pool) for pool in pools]
